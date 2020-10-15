@@ -1,5 +1,5 @@
 from vector import Vector
-
+from regression import LinearRegression
 
 def sumSquare(vector1, vector2):
     sum1 = 0
