@@ -1,47 +1,33 @@
-def updateVals(entriesList):
-    for i in range(len(entriesList)):
-        entriesList[i] = int(input())
+from vector import Vector
 
-def average(list):
-    avg = 0
-    for i in range(len(list)):
-        avg += list[i]
 
-    avg /= len(list)
-    return avg
-
-def sumSquare(list1, list2):
+def sumSquare(vector1, vector2):
     sum1 = 0
-    sumx = 0
-    sumy = 0
 
-    for i in range(len(list1)):
-        sum1 += list1[i]*list2[i]
-        sumx += list1[i]
-        sumy += list2[i]
+    for i in range(vector1.size):
+        sum1 += vector1.data[i] * vector2.data[i]
 
-    sum2 = sumx*sumy
-    sum2 /= len(list1)
+
+    sum2 = vector1.average*vector2.average
+    sum2 /= vector1.size
 
     return sum1 - (sum2)
 
 if __name__ == "__main__":
     numEntries = int(input("How many entries in the database: "))
-    x = [0 for i in range(numEntries)]
-    y = [0 for i in range(numEntries)]
+    x = Vector(numEntries)
+    y = Vector(numEntries)
 
     print("Please input the x values")
-    updateVals(x)
+    x.updateVals()
 
     print("Please input the y values (with respect to the x values)")
-    updateVals(y)
+    y.updateVals()
 
-    xbar = average(x)
-    ybar = average(y)
     
     print('\n')
-    print(f'xbar = {xbar}')
-    print(f'ybar = {ybar}')
+    print(f'xbar = {x.average}')
+    print(f'ybar = {y.average}')
     
     SSxx = sumSquare(x, x)
     SSyy = sumSquare(y, y)
@@ -53,3 +39,4 @@ if __name__ == "__main__":
     print(f'SSxy = {SSxy}')
     
 
+    
