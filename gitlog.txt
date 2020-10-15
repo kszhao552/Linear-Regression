@@ -1,0 +1,3 @@
+This is a simple script designed to make calculations for values related to linear regressions easier.
+
+The program is designed to take in two vectors as input and will print out values related to the regression, including xbar, ybar, bhat1, bhat2, SSxx, SSxy, etc. 
