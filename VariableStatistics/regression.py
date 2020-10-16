@@ -8,8 +8,21 @@ class LinearRegression(object):
         self.bhat0 = 0
         self.bhat1 =0
 
-    def update_vals(self, xbar, ybar):
-        self.bhat1 = SSxy/SSxx
-        self.bhat0 = ybar - xbar*bhat1
+    def update_vals(self, xlist, ylist):
+        self.update_bhat1
+        self.update_bhat2
+
+    def update_bhat1(self):
+        self.bhat1 = self.SSxy/self.SSxx
+
+    def update_bhat2(self, xlist, ylist):
+        self.bhat0 = ylist.average - xlist.average*bhat1
+
+    def errorList(self, xlist, ylist):
+        
 
         errors = Vector(self.size)
+        for i in range(self.size):
+            errors.data = ylist[i] -self.bhat1*xlist[i] -self.bhat0
+
+        return errors

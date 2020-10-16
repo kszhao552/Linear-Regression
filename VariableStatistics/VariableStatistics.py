@@ -9,7 +9,7 @@ def sumSquare(vector1, vector2):
 
 
     sum2 = vector1.average*vector2.average
-    sum2 /= vector1.size
+    sum2 *= vector1.size
 
     return sum1 - (sum2)
 
@@ -29,15 +29,21 @@ if __name__ == "__main__":
     print(f'xbar = {x.average}')
     print(f'ybar = {y.average}')
    
-    line = regression(numEntries)
-    SSxx = sumSquare(x, x)
-    SSyy = sumSquare(y, y)
-    SSxy = sumSquare(x, y)
+    line = LinearRegression(numEntries)
+    line.SSxx = sumSquare(x, x)
+    line.SSyy = sumSquare(y, y)
+    line.SSxy = sumSquare(x, y)
 
     print('\n')
-    print(f'SSxx = {SSxx}')
-    print(f'SSyy = {SSyy}')
-    print(f'SSxy = {SSxy}')
+    print(f'SSxx = {line.SSxx}')
+    print(f'SSyy = {line.SSyy}')
+    print(f'SSxy = {line.SSxy}')
+
+    line.update_vals(x, y)
+    errors = line.errorList(x, y)
+
+    print(f'the regression is yhat = {line.bhat0} + {line.bhat1}x')
+    print(f'the vector of errors is {line.errors}')
     
 
     
