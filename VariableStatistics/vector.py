@@ -5,7 +5,6 @@ class Vector(object):
         self.average = 0
 
     def avg(self):
-        print(self.data)
         for i in range(self.size):
             self.average += self.data[i]
 

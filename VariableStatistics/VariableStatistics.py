@@ -28,7 +28,8 @@ if __name__ == "__main__":
     print('\n')
     print(f'xbar = {x.average}')
     print(f'ybar = {y.average}')
-    
+   
+    line = regression(numEntries)
     SSxx = sumSquare(x, x)
     SSyy = sumSquare(y, y)
     SSxy = sumSquare(x, y)
