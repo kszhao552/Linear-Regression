@@ -15,11 +15,9 @@ class Vector(object):
             self.data[i] = int(input())
         self.avg()
 
-    def updateVals(self, list):
+    def changeVals(self, list):
         for i in range(self.size):
             self.data[i] = list[i]
-        self.avg
-
 
 
     

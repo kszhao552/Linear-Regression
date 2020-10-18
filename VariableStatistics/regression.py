@@ -21,8 +21,10 @@ class LinearRegression(object):
     def errorList(self, xlist, ylist):
         
 
-        errors = Vector(self.size)
+        e = [0 for i in range(self.size)]
         for i in range(self.size):
-            errors.data = ylist[i] -self.bhat1*xlist[i] -self.bhat0
-
+            e[i] = ylist[i] - self.bhat1 * xlist[i] -self.bhat0
+                
+        errors = Vector(self.size)
+        errors.changeVals(e)
         return errors

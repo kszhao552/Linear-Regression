@@ -40,10 +40,10 @@ if __name__ == "__main__":
     print(f'SSxy = {line.SSxy}')
 
     line.update_vals(x, y)
-    errors = line.errorList(x, y)
+    errors = line.errorList(x.data, y.data)
 
     print(f'the regression is yhat = {line.bhat0} + {line.bhat1}x')
-    print(f'the vector of errors is {line.errors}')
+    print(f'the vector of errors is {errors.data}')
     
 
     
