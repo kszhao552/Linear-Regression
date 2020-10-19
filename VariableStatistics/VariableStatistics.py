@@ -62,13 +62,13 @@ if __name__ == "__main__":
     print('\n')
     print(f'SSTO = {line.SSTO}')
     print(f'SSE = {line.SSE}')
-    print(f'SSR = {line.SSR}')
+    print(f'SSR = {line.SSR} = MSR')
 
     line.var = line.SSE/(line.size-2)
     line.sd = math.sqrt(line.var)
     print('\n')
-    print(f'var = {line.var}')
-    print(f'sd = {line.sd}')
+    print(f'var = {line.var} = MSE')
+    print(f'sd = {line.sd} = MSRE')
 
 
     
