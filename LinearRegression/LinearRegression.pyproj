@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>7afea4f0-1a37-4957-9ccf-b7d496241260</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>VariableStatistics.py</StartupFile>
+    <StartupFile>LinearRegression.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,7 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="VariableStatistics.py" />
+    <Compile Include="LinearRegression.py" />
+    <Compile Include="regression.py" />
+    <Compile Include="vector.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
