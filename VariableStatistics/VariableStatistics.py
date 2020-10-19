@@ -26,7 +26,10 @@ if __name__ == "__main__":
     print("Please input the y values (with respect to the x values)")
     y.updateVals()
 
-    
+    print('\n')
+    print(f'The x vector is {x.data}')
+    print(f'The y vector is {y.data}')
+
     print('\n')
     print(f'xbar = {x.average}')
     print(f'ybar = {y.average}')
@@ -46,7 +49,7 @@ if __name__ == "__main__":
     line.rSquared = line.SSxy/(math.sqrt(line.SSxx*line.SSyy))
     line.r = math.sqrt(line.rSquared)
 
-    print("\ n")
+    print("\n")
     print(f'the regression is yhat = {line.bhat0} + {line.bhat1}x')
     print(f'r² = {line.rSquared}')
     print(f'r = {line.r}')
@@ -57,7 +60,10 @@ if __name__ == "__main__":
     line.SSTO = sumSquare(y, y)
     line.SSR = line.SSTO - line.SSE
     print('\n')
+    print(f'SSTO = {line.SSTO}')
     print(f'SSE = {line.SSE}')
+    print(f'SSR = {line.SSR}')
+
 
     
 
