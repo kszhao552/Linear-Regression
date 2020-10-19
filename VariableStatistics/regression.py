@@ -45,6 +45,7 @@ class LinearRegression(object):
         return errors
 
     def yhatList(self, xlist):
+        #Creates the list of the predicted values and returns it using the created regression and the x vector.
         yhat = Vector(self.size)
         for i in range(self.size):
             yhat.data[i] = round(self.bhat1 * xlist[i] + self.bhat0, 3)
@@ -52,4 +53,6 @@ class LinearRegression(object):
         return yhat
 
     def fStat(self):
+        #Calculates the f statistic and returns it
+        #uses SSR as the MSR and variance as the MSE.
         self.f = round(self.SSR/self.var, 3)
