@@ -8,6 +8,12 @@ class LinearRegression(object):
         self.bhat0 = 0
         self.bhat1 =0
         self.SSE =0
+        self.SSTO =0
+        self.SSR =0
+        self.var = 0
+        self.sd =0
+        self.rSquared = 0
+        self.r =0
 
     def update_bhat1(self):
         self.bhat1 = self.SSxy/self.SSxx
