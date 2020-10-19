@@ -1,5 +1,7 @@
 from vector import Vector
 from regression import LinearRegression
+import math
+
 
 def sumSquare(vector1, vector2):
     sum1 = 0
@@ -41,13 +43,19 @@ if __name__ == "__main__":
 
     line.update_vals(x, y)
     errors = line.errorList(x.data, y.data)
+    line.rSquared = line.SSxy/(math.sqrt(line.SSxx*line.SSyy))
+    line.r = math.sqrt(line.rSquared)
 
     print("/n")
     print(f'the regression is yhat = {line.bhat0} + {line.bhat1}x')
+    print(f'r² = {line.rSquared}')
+    print(f'r = {line.r}')
     print(f'the vector of errors is {errors.data}')
+    
 
     line.SSE = sumSquare(errors, errors)
-    print(f'the sum of the errors is [line.SSE]')
+    print('\n')
+    print(f'the sum of the errors is {line.SSE}')
     
 
     
