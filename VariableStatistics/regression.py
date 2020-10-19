@@ -37,8 +37,15 @@ class LinearRegression(object):
 
         e = [0 for i in range(self.size)]
         for i in range(self.size):
-            e[i] = round(ylist[i] - self.bhat1 * xlist[i] -self.bhat0, 3)
+            e[i] = round(self.bhat1 * xlist[i] +self.bhat0 - ylist[i], 3)
                 
         errors = Vector(self.size)
         errors.changeVals(e)
         return errors
+
+    def yhatList(self, xlist):
+        yhat = Vector(self.size)
+        for i in range(self.size):
+            yhat.data[i] = round(self.bhat1 * xlist[i] + self.bhat0, 3)
+
+        return yhat
