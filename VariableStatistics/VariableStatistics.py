@@ -34,15 +34,16 @@ if __name__ == "__main__":
     print("Please input the y values (with respect to the x values)")
     y.updateVals() #get the values for the y vector
 
+    file = open("output.txt", "w")
+
     #prints out the vectors for easier reading
-    print('\n')
-    print(f'The x vector is {x.data}')
-    print(f'The y vector is {y.data}')
+    file.write(f'The x vector is {x.data}\n')
+    file.write(f'The y vector is {y.data}\n')
 
     #prints out the averages of the two vectors
-    print('\n')
-    print(f'xbar = {x.average}')
-    print(f'ybar = {y.average}')
+    file.write('\n')
+    file.write(f'xbar = {x.average}\n')
+    file.write(f'ybar = {y.average}\n')
    
     #Creates a linear regression class with the size of input given at the start of the program
     line = LinearRegression(numEntries)
@@ -51,10 +52,10 @@ if __name__ == "__main__":
     line.SSxy = round(sumSquare(x, y), 3) #calculates sum((xi - xbar)(yi-ybar))
 
     #prints out the values that were just calculated
-    print('\n')
-    print(f'SSxx = {line.SSxx}')
-    print(f'SSyy = {line.SSyy}')
-    print(f'SSxy = {line.SSxy}')
+    file.write('\n')
+    file.write(f'SSxx = {line.SSxx}\n')
+    file.write(f'SSyy = {line.SSyy}\n')
+    file.write(f'SSxy = {line.SSxy}\n')
    
     
     line.update_vals(x, y) #creates the values for the linear regression.
@@ -66,12 +67,12 @@ if __name__ == "__main__":
     yhat = line.yhatList(x.data)
 
     #prints out the values that the script just calculated
-    print("\n")
-    print(f'the regression is yhat = {line.bhat0} + {line.bhat1}x')
-    print(f'r² = {line.rSquared}')
-    print(f'r = {line.r}')
-    print(f'the vector of the predicted values is {yhat.data}')
-    print(f'the vector of errors is {errors.data}')
+    file.write("\n")
+    file.write(f'the regression is yhat = {line.bhat0} + {line.bhat1}x\n')
+    file.write(f'r² = {line.rSquared}\n')
+    file.write(f'r = {line.r}\n')
+    file.write(f'the vector of the predicted values is {yhat.data}\n')
+    file.write(f'the vector of errors is {errors.data}\n')
     
     #Calclates the analysis of variance for the regression
     #i.e Error Sum of Squares, Regression Sum of Square, and Total Sum of Squares
@@ -79,22 +80,23 @@ if __name__ == "__main__":
     line.SSTO = round(sumSquare(y, y), 4)
     line.SSR = round(line.SSTO - line.SSE, 4)
     #prints out the values that was just calculated
-    print('\n')
-    print(f'SSTO = {line.SSTO}')
-    print(f'SSE = {line.SSE}')
-    print(f'SSR = {line.SSR} = MSR')
+    file.write('\n')
+    file.write(f'SSTO = {line.SSTO}\n')
+    file.write(f'SSE = {line.SSE}\n')
+    file.write(f'SSR = {line.SSR} = MSR\n')
 
     #Calculates the variance and the standard deviation of the linear regression
     line.var = round(line.SSE/(line.size-2), 3)
     line.sd = round(math.sqrt(line.var), 3)
-    print('\n')
-    print(f'var = {line.var} = MSE')
-    print(f'sd = {line.sd} = MSRE')
+    file.write('\n')
+    file.write(f'var = {line.var} = MSE\n')
+    file.write(f'sd = {line.sd} = MSRE\n')
 
     #Calculate the f statistic and return it with proper amount of df
     line.fStat()
-    print('\n')
-    print(f'f = {line.f} with (1, {line.size-2}) degrees of freedom')
+    file.write('\n')
+    file.write(f'f = {line.f} with (1, {line.size-2}) degrees of freedom\n')
+    file.close()
 
 
     
