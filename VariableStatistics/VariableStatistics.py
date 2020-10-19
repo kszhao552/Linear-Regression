@@ -20,7 +20,7 @@ def sumSquare(vector1, vector2):
     return sum1 - (sum2)
 
 if __name__ == "__main__":
-    """TODO: calculate the f statistic and change the print statements to write to a new file output"""
+    """TODO: change the print statements to write to a new file output"""
 
     #initalize the x and y vectors with the proper sizes.
     numEntries = int(input("How many entries in the database: "))
