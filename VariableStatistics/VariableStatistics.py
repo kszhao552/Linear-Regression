@@ -64,6 +64,12 @@ if __name__ == "__main__":
     print(f'SSE = {line.SSE}')
     print(f'SSR = {line.SSR}')
 
+    line.var = line.SSE/(line.size-2)
+    line.sd = math.sqrt(line.var)
+    print('\n')
+    print(f'var = {line.var}')
+    print(f'sd = {line.sd}')
+
 
     
 
