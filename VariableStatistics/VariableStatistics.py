@@ -1,7 +1,7 @@
 from vector import Vector
 from regression import LinearRegression
 import math
-
+import csv
 
 def sumSquare(vector1, vector2):
     """calcultes the sum of the squares for two vectors through the formula
@@ -98,7 +98,12 @@ if __name__ == "__main__":
     file.write(f'f = {line.f} with (1, {line.size-2}) degrees of freedom\n')
     file.close()
 
-
+    with open('vectors.csv', mode = 'w', newline='') as vector_file:
+        vector_writer = csv.writer(vector_file, delimiter = ',', quotechar = '"',quoting = csv.QUOTE_MINIMAL)
+        
+        vector_writer.writerow(['x', 'y', 'yhat', 'errors'])
+        for i in range(numEntries):
+            vector_writer.writerow([x.data[i], y.data[i], yhat.data[i], errors.data[i]])
     
-
-    
+    print('\n')
+    print(f'Output has been created in the directory')
