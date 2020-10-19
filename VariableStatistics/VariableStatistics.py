@@ -46,7 +46,7 @@ if __name__ == "__main__":
     line.rSquared = line.SSxy/(math.sqrt(line.SSxx*line.SSyy))
     line.r = math.sqrt(line.rSquared)
 
-    print("/n")
+    print("\ n")
     print(f'the regression is yhat = {line.bhat0} + {line.bhat1}x')
     print(f'r² = {line.rSquared}')
     print(f'r = {line.r}')
@@ -54,8 +54,11 @@ if __name__ == "__main__":
     
 
     line.SSE = sumSquare(errors, errors)
+    line.SSTO = sumSquare(y, y)
+    line.SSR = line.SSTO - line.SSE
     print('\n')
-    print(f'the sum of the errors is {line.SSE}')
+    print(f'SSE = {line.SSE}')
+
     
 
     
