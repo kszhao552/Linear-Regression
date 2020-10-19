@@ -91,6 +91,11 @@ if __name__ == "__main__":
     print(f'var = {line.var} = MSE')
     print(f'sd = {line.sd} = MSRE')
 
+    #Calculate the f statistic and return it with proper amount of df
+    line.fStat()
+    print('\n')
+    print(f'f = {line.f} with (1, {line.size-2}) degrees of freedom')
+
 
     
 

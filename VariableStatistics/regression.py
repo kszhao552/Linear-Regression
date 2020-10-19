@@ -15,6 +15,7 @@ class LinearRegression(object):
         self.sd =0
         self.rSquared = 0
         self.r =0
+        self.f = 0
 
     def update_bhat1(self):
         #Calculates the value of bhat1
@@ -49,3 +50,6 @@ class LinearRegression(object):
             yhat.data[i] = round(self.bhat1 * xlist[i] + self.bhat0, 3)
 
         return yhat
+
+    def fStat(self):
+        self.f = round(self.SSR/self.var, 3)
