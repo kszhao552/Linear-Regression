@@ -42,8 +42,12 @@ if __name__ == "__main__":
     line.update_vals(x, y)
     errors = line.errorList(x.data, y.data)
 
+    print("/n")
     print(f'the regression is yhat = {line.bhat0} + {line.bhat1}x')
     print(f'the vector of errors is {errors.data}')
+
+    line.SSE = sumSquare(errors, errors)
+    print(f'the sum of the errors is [line.SSE]')
     
 
     

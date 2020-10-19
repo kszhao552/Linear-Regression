@@ -7,6 +7,7 @@ class LinearRegression(object):
         self.SSyy = 0
         self.bhat0 = 0
         self.bhat1 =0
+        self.SSE =0
 
     def update_bhat1(self):
         self.bhat1 = self.SSxy/self.SSxx
