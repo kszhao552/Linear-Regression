@@ -98,6 +98,7 @@ if __name__ == "__main__":
     file.write(f'f = {line.f} with (1, {line.size-2}) degrees of freedom\n')
     file.close()
 
+    #writes the vectors into a csv file for a later reference
     with open('vectors.csv', mode = 'w', newline='') as vector_file:
         vector_writer = csv.writer(vector_file, delimiter = ',', quotechar = '"',quoting = csv.QUOTE_MINIMAL)
         
