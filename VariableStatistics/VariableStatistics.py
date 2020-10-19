@@ -61,6 +61,8 @@ if __name__ == "__main__":
     errors = line.errorList(x.data, y.data) #creates the vector of the errors of the linear regression
     line.rSquared = round(abs(line.SSxy/(math.sqrt(line.SSxx*line.SSyy))), 3) #calculates the coefficient of determination
     line.r = round(math.sqrt(line.rSquared), 3) #calculates the coefficient of correlation
+    if(line.bhat1 < 0):
+        line.r *= -1
 
     #prints out the values that the script just calculated
     print("\n")
