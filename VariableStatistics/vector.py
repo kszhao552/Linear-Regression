@@ -11,6 +11,7 @@ class Vector(object):
             self.average += self.data[i]
 
         self.average /= self.size
+        self.average = round(self.average, 3)
 
     def updateVals(self):
         """takes the input and updates the list within the vector"""

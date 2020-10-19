@@ -18,11 +18,11 @@ class LinearRegression(object):
 
     def update_bhat1(self):
         #Calculates the value of bhat1
-        self.bhat1 = self.SSxy/self.SSxx
+        self.bhat1 = round(self.SSxy/self.SSxx, 3)
 
     def update_bhat0(self, xlist, ylist):
         #Calculates the value of bhat0
-        self.bhat0 = ylist.average - xlist.average*self.bhat1
+        self.bhat0 = round(ylist.average - xlist.average*self.bhat1, 3)
 
     def update_vals(self, xlist, ylist):
         #Calls the two previous values to update the values
@@ -37,7 +37,7 @@ class LinearRegression(object):
 
         e = [0 for i in range(self.size)]
         for i in range(self.size):
-            e[i] = ylist[i] - self.bhat1 * xlist[i] -self.bhat0
+            e[i] = round(ylist[i] - self.bhat1 * xlist[i] -self.bhat0, 3)
                 
         errors = Vector(self.size)
         errors.changeVals(e)

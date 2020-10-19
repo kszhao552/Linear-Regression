@@ -47,9 +47,9 @@ if __name__ == "__main__":
    
     #Creates a linear regression class with the size of input given at the start of the program
     line = LinearRegression(numEntries)
-    line.SSxx = sumSquare(x, x) #calculates sum((xi-xbar)^2)
-    line.SSyy = sumSquare(y, y) #calculates sum((yi - ybar)^2)
-    line.SSxy = sumSquare(x, y) #calculates sum((xi - xbar)(yi-ybar))
+    line.SSxx = round(sumSquare(x, x), 3) #calculates sum((xi-xbar)^2)
+    line.SSyy = round(sumSquare(y, y), 3) #calculates sum((yi - ybar)^2)
+    line.SSxy = round(sumSquare(x, y), 3) #calculates sum((xi - xbar)(yi-ybar))
 
     #prints out the values that were just calculated
     print('\n')
@@ -60,8 +60,8 @@ if __name__ == "__main__":
     
     line.update_vals(x, y) #creates the values for the linear regression.
     errors = line.errorList(x.data, y.data) #creates the vector of the errors of the linear regression
-    line.rSquared = line.SSxy/(math.sqrt(line.SSxx*line.SSyy)) #calculates the coefficient of determination
-    line.r = math.sqrt(line.rSquared) #calculates the coefficient of correlation
+    line.rSquared = round(abs(line.SSxy/(math.sqrt(line.SSxx*line.SSyy))), 3) #calculates the coefficient of determination
+    line.r = round(math.sqrt(line.rSquared), 3) #calculates the coefficient of correlation
 
     #prints out the values that the script just calculated
     print("\n")
@@ -72,9 +72,9 @@ if __name__ == "__main__":
     
     #Calclates the analysis of variance for the regression
     #i.e Error Sum of Squares, Regression Sum of Square, and Total Sum of Squares
-    line.SSE = sumSquare(errors, errors)
-    line.SSTO = sumSquare(y, y)
-    line.SSR = line.SSTO - line.SSE
+    line.SSE = round(sumSquare(errors, errors), 4)
+    line.SSTO = round(sumSquare(y, y), 4)
+    line.SSR = round(line.SSTO - line.SSE, 4)
     #prints out the values that was just calculated
     print('\n')
     print(f'SSTO = {line.SSTO}')
@@ -82,8 +82,8 @@ if __name__ == "__main__":
     print(f'SSR = {line.SSR} = MSR')
 
     #Calculates the variance and the standard deviation of the linear regression
-    line.var = line.SSE/(line.size-2)
-    line.sd = math.sqrt(line.var)
+    line.var = round(line.SSE/(line.size-2), 3)
+    line.sd = round(math.sqrt(line.var), 3)
     print('\n')
     print(f'var = {line.var} = MSE')
     print(f'sd = {line.sd} = MSRE')
