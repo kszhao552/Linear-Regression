@@ -2,6 +2,8 @@ from vector import Vector
 from regression import LinearRegression
 import math
 import csv
+import tkinter as tk
+from tkinter import filedialog
 
 def sumSquare(vector1, vector2):
     """calcultes the sum of the squares for two vectors through the formula
@@ -20,7 +22,12 @@ def sumSquare(vector1, vector2):
     return sum1 - (sum2)
 
 if __name__ == "__main__":
-    """TODO: change the print statements to write to a new file output"""
+    """TODO: Take in csv file as input for larger data sets."""
+
+    #ask the user to select a file path.
+    root = tk.Tk()
+    root.withdraw()
+    filePath = filedialog.askopenfilename()
 
     #initalize the x and y vectors with the proper sizes.
     numEntries = int(input("How many entries in the database: "))
