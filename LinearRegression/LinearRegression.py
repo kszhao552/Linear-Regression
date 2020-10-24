@@ -22,17 +22,23 @@ def sumSquare(vector1, vector2):
     #return the difference between the two/
     return sum1 - (sum2)
 
-def initializeVectors():
+def initializeVectors(x, y):
      #ask the user to select a file path.
     root = tk.Tk()
     root.withdraw()
     filePath = filedialog.askopenfilename()
 
     #check to see if the file is a csv file, if not, get manual input.
-    if (Path(filePath).suffix == '.csv'):
-            with open(filePath, 'r') as input_file:
-                csv_reader = csv.reader(csv_file, delimiter=',')
-    else:
+    with open(filePath, 'r') as input_file:
+        csv_reader = csv.reader(input_file, delimiter=',')
+
+        sniffer = csv.Sniffer()
+        header = sniffer.has_header(input_file.read(32))
+
+        if header:
+            next(csv_reader)
+
+def inputManual(x, y):
         #file was not a csv and we need to get manual input
         #initalize the x and y vectors with the proper sizes.
         print("File is not a csv file. Please input the data manually.")
@@ -41,11 +47,11 @@ def initializeVectors():
         y = Vector(numEntries)
 
 
-    print("Please input the x values")
-    x.updateVals() #get the values for the x vector
+        print("Please input the x values")
+        x.updateVals() #get the values for the x vector
 
-    print("Please input the y values (with respect to the x values)")
-    y.updateVals() #get the values for the y vector
+        print("Please input the y values (with respect to the x values)")
+        y.updateVals() #get the values for the y vector
 
 
 if __name__ == "__main__":
