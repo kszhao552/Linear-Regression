@@ -25,6 +25,11 @@ class Vector(object):
             self.data[i] = list[i]
 
 
+    def updateLen(self, len):
+        self.size = len
+        self.data = [0 for x in range(len)]
+
+
     
 
 
