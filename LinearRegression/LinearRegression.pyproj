@@ -4,13 +4,14 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>7afea4f0-1a37-4957-9ccf-b7d496241260</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>LinearRegression.py</StartupFile>
+    <StartupFile>UserInterface.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>VariableStatistics</Name>
     <RootNamespace>VariableStatistics</RootNamespace>
+    <IsWindowsApplication>False</IsWindowsApplication>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,6 +23,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="LinearRegression.py" />
+    <Compile Include="UserInterface.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="regression.py" />
     <Compile Include="vector.py" />
   </ItemGroup>
