@@ -2,6 +2,7 @@ from vector import Vector
 from regression import LinearRegression
 import math
 import csv
+import pandas
 import tkinter as tk
 from tkinter import filedialog
 from pathlib import Path
@@ -28,25 +29,42 @@ def initializeVectors(x, y):
     root.withdraw()
     filePath = filedialog.askopenfilename()
 
-    with open(filePath, 'r') as input_file:
+
+    with open(filePath, 'r+') as input_file:
         csv_reader = csv.reader(input_file, delimiter=',')
+        
+       
 
         #Use a sniffer to see if there is a header
         sniffer = csv.Sniffer()
         header = sniffer.has_header(input_file.read(32))
+        input_file.seek(0)
 
         #get the length of the csv file
         lines= len(list(csv_reader))
-
+        input_file.seek(0)
         #if there is a header, then we move to the next line, and remove it from our line count
         if header:
-            next(csv_reader)
+            next(csv_reader, None)
+            print("test")
             lines -= 1
 
         #update the length of the vectors to match the data set.
         x.updateLen(lines)
         y.updateLen(lines)
 
+        #i will keep count of position in vector
+        i = 0
+        #goes through each rows in the csv file and updates x and y
+        for row in csv_reader:
+            print(row)
+            x.data[i] = int(row[0])
+            y.data[i] = int(row[1])
+            i += 1
+
+        #updates the average of the vectors
+        x.avg()
+        y.avg()
 
 
 def inputManual(x, y):
@@ -70,6 +88,9 @@ if __name__ == "__main__":
     x = Vector(0)
     y = Vector(0)
     initializeVectors(x, y)
+    numEntries = x.size
+
+    print(x.data, y.data)
 
     file = open("output.txt", "w")
 
