@@ -28,15 +28,26 @@ def initializeVectors(x, y):
     root.withdraw()
     filePath = filedialog.askopenfilename()
 
-    #check to see if the file is a csv file, if not, get manual input.
     with open(filePath, 'r') as input_file:
         csv_reader = csv.reader(input_file, delimiter=',')
 
+        #Use a sniffer to see if there is a header
         sniffer = csv.Sniffer()
         header = sniffer.has_header(input_file.read(32))
 
+        #get the length of the csv file
+        lines= len(list(csv_reader))
+
+        #if there is a header, then we move to the next line, and remove it from our line count
         if header:
             next(csv_reader)
+            lines -= 1
+
+        #update the length of the vectors to match the data set.
+        x.updateLen(lines)
+        y.updateLen(lines)
+
+
 
 def inputManual(x, y):
         #file was not a csv and we need to get manual input
@@ -56,7 +67,9 @@ def inputManual(x, y):
 
 if __name__ == "__main__":
     """TODO: Take in csv file as input for larger data sets."""
-    initializeVectors()
+    x = Vector(0)
+    y = Vector(0)
+    initializeVectors(x, y)
 
     file = open("output.txt", "w")
 
