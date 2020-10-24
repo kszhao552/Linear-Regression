@@ -4,7 +4,7 @@ import PySimpleGUI as sg
 
 layout = [[sg.Text('Select a file:')], 
          [sg.FileBrowse(), sg.Input()],
-         [sg.Button("Next")]]
+         [sg.Button("Next"), sg.Button("Input Values Manually")]]
 
 window = sg.Window("Linear Regression", layout)
 
