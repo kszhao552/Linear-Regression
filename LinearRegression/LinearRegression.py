@@ -82,9 +82,7 @@ def inputManual(x, y):
         print("Please input the y values (with respect to the x values)")
         y.updateVals() #get the values for the y vector
 
-def writeToFile(x, y): 
-        numEntries = x.size
-    
+def writeToFile(x, y):     
 
         file = open("output.txt", "w")
 
@@ -98,25 +96,13 @@ def writeToFile(x, y):
         file.write(f'ybar = {y.average}\n')
    
         #Creates a linear regression class with the size of input given at the start of the program
-        line = LinearRegression(numEntries)
-        line.SSxx = round(sumSquare(x, x), 3) #calculates sum((xi-xbar)^2)
-        line.SSyy = round(sumSquare(y, y), 3) #calculates sum((yi - ybar)^2)
-        line.SSxy = round(sumSquare(x, y), 3) #calculates sum((xi - xbar)(yi-ybar))
+        
 
         #prints out the values that were just calculated
         file.write('\n')
         file.write(f'SSxx = {line.SSxx}\n')
         file.write(f'SSyy = {line.SSyy}\n')
-        file.write(f'SSxy = {line.SSxy}\n')
-   
-    
-        line.update_vals(x, y) #creates the values for the linear regression.
-        errors = line.errorList(x.data, y.data) #creates the vector of the errors of the linear regression
-        line.rSquared = round(abs(line.SSxy/(math.sqrt(line.SSxx*line.SSyy))), 3) #calculates the coefficient of determination
-        line.r = round(math.sqrt(line.rSquared), 3) #calculates the coefficient of correlation
-        if(line.bhat1 < 0): # if the slope is negative, then we need to make r negative.
-            line.r *= -1
-        yhat = line.yhatList(x.data)
+        file.write(f'SSxy = {line.SSxy}\n')        
 
         #prints out the values that the script just calculated
         file.write("\n")
@@ -126,26 +112,19 @@ def writeToFile(x, y):
         file.write(f'the vector of the predicted values is {yhat.data}\n')
         file.write(f'the vector of errors is {errors.data}\n')
     
-        #Calclates the analysis of variance for the regression
-        #i.e Error Sum of Squares, Regression Sum of Square, and Total Sum of Squares
-        line.SSE = round(sumSquare(errors, errors), 4)
-        line.SSTO = round(sumSquare(y, y), 4)
-        line.SSR = round(line.SSTO - line.SSE, 4)
+
         #prints out the values that was just calculated
         file.write('\n')
         file.write(f'SSTO = {line.SSTO}\n')
         file.write(f'SSE = {line.SSE}\n')
         file.write(f'SSR = {line.SSR} = MSR\n')
 
-        #Calculates the variance and the standard deviation of the linear regression
-        line.var = round(line.SSE/(line.size-2), 3)
-        line.sd = round(math.sqrt(line.var), 3)
+     
         file.write('\n')
         file.write(f'var = {line.var} = MSE\n')
         file.write(f'sd = {line.sd} = MSRE\n')
 
         #Calculate the f statistic and return it with proper amount of df
-        line.fStat()
         file.write('\n')
         file.write(f'f = {line.f} with (1, {line.size-2}) degrees of freedom\n')
         file.close()
@@ -161,10 +140,45 @@ def writeToFile(x, y):
         print('\n')
         print(f'Output has been created in the directory')
 
+def calculateLine(x, y, line):
+    line = updateLen(x.size)
+    line.SSxx = round(sumSquare(x, x), 3) #calculates sum((xi-xbar)^2)
+    line.SSyy = round(sumSquare(y, y), 3) #calculates sum((yi - ybar)^2)
+    line.SSxy = round(sumSquare(x, y), 3) #calculates sum((xi - xbar)(yi-ybar))
+
+    line.update_vals(x, y) #creates the values for the linear regression.
+    line.rSquared = round(abs(line.SSxy/(math.sqrt(line.SSxx*line.SSyy))), 3) #calculates the coefficient of determination
+    line.r = round(math.sqrt(line.rSquared), 3) #calculates the coefficient of correlation
+    if(line.bhat1 < 0): # if the slope is negative, then we need to make r negative.
+        line.r *= -1
+    yhat = line.yhatList(x.data)
+
+    line.fStat()
+
+
+def calculatePredicted(x, line):
+    yhat = line.yhatList(x.data)
+    
+def calculateErrors(x, y, line, yhat, errors):
+    errors = line.errorList(x.data, y.data) #creates the vector of the errors of the linear regression
+    #Calclates the analysis of variance for the regression
+    #i.e Error Sum of Squares, Regression Sum of Square, and Total Sum of Squares
+    line.SSE = round(sumSquare(errors, errors), 4)
+    line.SSTO = round(sumSquare(y, y), 4)
+    line.SSR = round(line.SSTO - line.SSE, 4)
+
+    #Calculates the variance and the standard deviation of the linear regression
+    line.var = round(line.SSE/(line.size-2), 3)
+    line.sd = round(math.sqrt(line.var), 3)
+
+   
+
+
 if __name__ == "__main__":
     """TODO: Take in csv file as input for larger data sets."""
     x = Vector(0)
     y = Vector(0)
+    line = LinearRegression(0)
     try:
         initializeVectors(x, y)
         writeToFile(x, y)
