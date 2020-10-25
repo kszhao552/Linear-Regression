@@ -30,7 +30,7 @@ class LinearRegression(object):
         self.update_bhat1()
         self.update_bhat0(xlist, ylist)
     
-    def errorList(self, xlist, ylist):
+    def errorList(self, ylist, predictedlist):
         """Creates the error vector and returns it.
         In order to do so, we need to have the x vector and y vector.
         Calculates the expected y value for a given x and then subracts
@@ -38,7 +38,7 @@ class LinearRegression(object):
 
         e = [0 for i in range(self.size)]
         for i in range(self.size):
-            e[i] = round(self.bhat1 * xlist[i] +self.bhat0 - ylist[i], 3)
+            e[i] = round(ylist[i] - predictelist[i], 3)
                 
         errors = Vector(self.size)
         errors.changeVals(e)

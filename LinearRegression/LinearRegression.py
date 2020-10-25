@@ -158,9 +158,10 @@ def calculateLine(x, y, line):
 
 def calculatePredicted(x, line):
     yhat = line.yhatList(x.data)
+    return yhat
     
 def calculateErrors(x, y, line, yhat, errors):
-    errors = line.errorList(x.data, y.data) #creates the vector of the errors of the linear regression
+    errors = line.errorList(y.data, yhat.data) #creates the vector of the errors of the linear regression
     #Calclates the analysis of variance for the regression
     #i.e Error Sum of Squares, Regression Sum of Square, and Total Sum of Squares
     line.SSE = round(sumSquare(errors, errors), 4)
@@ -171,6 +172,8 @@ def calculateErrors(x, y, line, yhat, errors):
     line.var = round(line.SSE/(line.size-2), 3)
     line.sd = round(math.sqrt(line.var), 3)
 
+    return errors
+
    
 
 
@@ -179,6 +182,8 @@ if __name__ == "__main__":
     x = Vector(0)
     y = Vector(0)
     line = LinearRegression(0)
+    errors = Vector(0)
+    predicted = Vector(0)
     try:
         initializeVectors(x, y)
         writeToFile(x, y)
