@@ -56,3 +56,6 @@ class LinearRegression(object):
         #Calculates the f statistic and returns it
         #uses SSR as the MSR and variance as the MSE.
         self.f = round(self.SSR/self.var, 3)
+
+    def updateLen(self, size):
+        self.size = size
