@@ -58,8 +58,8 @@ def initializeVectors(x, y):
         #goes through each rows in the csv file and updates x and y
         for row in csv_reader:
             print(row)
-            x.data[i] = int(row[0])
-            y.data[i] = int(row[1])
+            x.data[i] = float(row[0])
+            y.data[i] = float(row[1])
             i += 1
 
         #updates the average of the vectors
@@ -185,7 +185,6 @@ if __name__ == "__main__":
     line = LinearRegression(0)
     errors = Vector(0)
     predicted = Vector(0)
-    
     try:
         initializeVectors(x, y)
         calculateLine(x, y, line)
