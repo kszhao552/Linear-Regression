@@ -38,7 +38,7 @@ class LinearRegression(object):
 
         e = [0 for i in range(self.size)]
         for i in range(self.size):
-            e[i] = round(ylist[i] - predictelist[i], 3)
+            e[i] = round(ylist[i] - predictedlist[i], 3)
                 
         errors = Vector(self.size)
         errors.changeVals(e)
