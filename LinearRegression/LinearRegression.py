@@ -82,7 +82,7 @@ def inputManual(x, y):
         print("Please input the y values (with respect to the x values)")
         y.updateVals() #get the values for the y vector
 
-def writeToFile(x, y):     
+def writeToFile(x, y, line, yhat, errors):     
 
         file = open("output.txt", "w")
 
@@ -134,26 +134,25 @@ def writeToFile(x, y):
             vector_writer = csv.writer(vector_file, delimiter = ',', quotechar = '"',quoting = csv.QUOTE_MINIMAL)
         
             vector_writer.writerow(['x', 'y', 'yhat', 'errors'])
-            for i in range(numEntries):
+            for i in range(x.size):
                 vector_writer.writerow([x.data[i], y.data[i], yhat.data[i], errors.data[i]])
     
         print('\n')
         print(f'Output has been created in the directory')
 
 def calculateLine(x, y, line):
-    line = updateLen(x.size)
+    line.updateLen(x.size)
     line.SSxx = round(sumSquare(x, x), 3) #calculates sum((xi-xbar)^2)
     line.SSyy = round(sumSquare(y, y), 3) #calculates sum((yi - ybar)^2)
     line.SSxy = round(sumSquare(x, y), 3) #calculates sum((xi - xbar)(yi-ybar))
 
     line.update_vals(x, y) #creates the values for the linear regression.
+    print(line.SSxx)
+    print(line.SSyy)
     line.rSquared = round(abs(line.SSxy/(math.sqrt(line.SSxx*line.SSyy))), 3) #calculates the coefficient of determination
     line.r = round(math.sqrt(line.rSquared), 3) #calculates the coefficient of correlation
     if(line.bhat1 < 0): # if the slope is negative, then we need to make r negative.
         line.r *= -1
-    yhat = line.yhatList(x.data)
-
-    line.fStat()
 
 
 def calculatePredicted(x, line):
@@ -172,6 +171,8 @@ def calculateErrors(x, y, line, yhat, errors):
     line.var = round(line.SSE/(line.size-2), 3)
     line.sd = round(math.sqrt(line.var), 3)
 
+    line.fStat()
+
     return errors
 
    
@@ -184,13 +185,19 @@ if __name__ == "__main__":
     line = LinearRegression(0)
     errors = Vector(0)
     predicted = Vector(0)
+    
     try:
         initializeVectors(x, y)
-        writeToFile(x, y)
+        calculateLine(x, y, line)
+        predicted = calculatePredicted(x, line)
+        errors = calculateErrors(x, y, line, predicted, errors)
+        writeToFile(x, y, line, predicted, errors)
     except: 
         try:
             print("Unable to make calculations, please input values manually.")
             inputManual(x, y)
+            predicted = calculatePredicted(x, line)
+            errors = calculateErrors(x, y, line, predicted, errors)
             writeToFile(x, y)
         except:
             print("Error occured.")
