@@ -24,8 +24,8 @@ class Vector(object):
         for i in range(self.size):
             self.data[i] = list[i]
 
-
     def updateLen(self, len):
+        """changes the length of the vector"""
         self.size = len
         self.data = [0 for x in range(len)]
 
