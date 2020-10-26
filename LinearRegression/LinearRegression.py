@@ -193,7 +193,8 @@ if __name__ == "__main__":
         predicted = calculatePredicted(x, line)
         errors = calculateErrors(x, y, line, predicted, errors)
         writeToFile(x, y, line, predicted, errors)
-    except: 
+    except Exception as er: 
+        print(f'Error: {er}')
         try:
             print(f"Unable to make calculations, please input values manually.")
             inputManual(x, y)
