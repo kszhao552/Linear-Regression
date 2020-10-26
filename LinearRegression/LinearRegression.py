@@ -46,7 +46,6 @@ def initializeVectors(x, y):
         #if there is a header, then we move to the next line, and remove it from our line count
         if header:
             next(csv_reader, None)
-            print("test")
             lines -= 1
 
         #update the length of the vectors to match the data set.
@@ -57,7 +56,6 @@ def initializeVectors(x, y):
         i = 0
         #goes through each rows in the csv file and updates x and y
         for row in csv_reader:
-            print(row)
             x.data[i] = float(row[0])
             y.data[i] = float(row[1])
             i += 1
@@ -66,6 +64,7 @@ def initializeVectors(x, y):
         x.avg()
         y.avg()
 
+        print(x.size)
 
 def inputManual(x, y):
         #file was not a csv and we need to get manual input
@@ -149,10 +148,11 @@ def calculateLine(x, y, line):
     line.update_vals(x, y) #creates the values for the linear regression.
     print(line.SSxx)
     print(line.SSyy)
-    line.rSquared = round(abs(line.SSxy/(math.sqrt(line.SSxx*line.SSyy))), 3) #calculates the coefficient of determination
-    line.r = round(math.sqrt(line.rSquared), 3) #calculates the coefficient of correlation
-    if(line.bhat1 < 0): # if the slope is negative, then we need to make r negative.
-        line.r *= -1
+
+    #TODO: change the equation since this doesn't seem to work.
+    line.r = round(line.SSxy/(math.sqrt(line.SSxx*line.SSyy)), 3) #calculates the coefficient of determination
+    line.rSquared = round(pow(line.r, 2), 3) #calculates the coefficient of correlation
+
 
 
 def calculatePredicted(x, line):
