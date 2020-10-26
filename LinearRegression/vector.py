@@ -16,7 +16,10 @@ class Vector(object):
     def updateVals(self):
         """takes the input and updates the list within the vector"""
         for i in range(self.size):
-            self.data[i] = int(input())
+            try:
+                self.data[i] = int(input())
+            except ValueException:
+                raise Exception("Input is not number")
         self.avg()
 
     def changeVals(self, list):
