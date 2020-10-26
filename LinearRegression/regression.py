@@ -55,7 +55,10 @@ class LinearRegression(object):
     def fStat(self):
         #Calculates the f statistic and returns it
         #uses SSR as the MSR and variance as the MSE.
-        self.f = round(self.SSR/self.var, 3)
+        try:
+            self.f = round(self.SSR/self.var, 3)
+        except ZeroDivisionError:
+            self.f = float('inf')
 
     def updateLen(self, size):
         self.size = size

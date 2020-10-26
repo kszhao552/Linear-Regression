@@ -6,6 +6,8 @@ import pandas
 import tkinter as tk
 from tkinter import filedialog
 from pathlib import Path
+import sys
+
 
 def sumSquare(vector1, vector2):
     """calcultes the sum of the squares for two vectors through the formula
@@ -47,6 +49,8 @@ def initializeVectors(x, y):
         if header:
             next(csv_reader, None)
             lines -= 1
+        if lines <3:
+            sys.exit(f"Error: Sample size not large enough")
 
         #update the length of the vectors to match the data set.
         x.updateLen(lines)
@@ -64,21 +68,21 @@ def initializeVectors(x, y):
         x.avg()
         y.avg()
 
-        print(x.size)
 
 def inputManual(x, y):
         #file was not a csv and we need to get manual input
         #initalize the x and y vectors with the proper sizes.
-        print("Error occured. Please input the data manually.")
-        numEntries = int(input("How many entries in the database: "))
+        numEntries = int(input(f"How many entries in the database: "))
+        if numEntries < 3:
+            sys.exit(f"Error: Sample size not large enough")
         x.updateLen(numEntries)
         y.updateLen(numEntries)
 
 
-        print("Please input the x values")
+        print(f"Please input the x values")
         x.updateVals() #get the values for the x vector
 
-        print("Please input the y values (with respect to the x values)")
+        print(f"Please input the y values (with respect to the x values)")
         y.updateVals() #get the values for the y vector
 
 def writeToFile(x, y, line, yhat, errors):     
@@ -146,10 +150,8 @@ def calculateLine(x, y, line):
     line.SSxy = round(sumSquare(x, y), 3) #calculates sum((xi - xbar)(yi-ybar))
 
     line.update_vals(x, y) #creates the values for the linear regression.
-    print(line.SSxx)
-    print(line.SSyy)
 
-    #TODO: change the equation since this doesn't seem to work.
+   
     line.r = round(line.SSxy/(math.sqrt(line.SSxx*line.SSyy)), 3) #calculates the coefficient of determination
     line.rSquared = round(pow(line.r, 2), 3) #calculates the coefficient of correlation
 
@@ -193,13 +195,13 @@ if __name__ == "__main__":
         writeToFile(x, y, line, predicted, errors)
     except: 
         try:
-            print("Unable to make calculations, please input values manually.")
+            print(f"Unable to make calculations, please input values manually.")
             inputManual(x, y)
             predicted = calculatePredicted(x, line)
             errors = calculateErrors(x, y, line, predicted, errors)
             writeToFile(x, y)
-        except:
-            print("Error occured.")
+        except Exception as e:
+            print(f"Error occured: {e}")
     
 
 
