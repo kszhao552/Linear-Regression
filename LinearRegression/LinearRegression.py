@@ -7,7 +7,7 @@ import tkinter as tk
 from tkinter import filedialog
 from pathlib import Path
 import sys
-
+import traceback
 
 def sumSquare(vector1, vector2):
     """calcultes the sum of the squares for two vectors through the formula
@@ -50,7 +50,7 @@ def initializeVectors(x, y):
             next(csv_reader, None)
             lines -= 1
         if lines <3:
-            sys.exit(f"Error: Sample size not large enough")
+            raise Exception(f"Error: Sample size not large enough")
 
         #update the length of the vectors to match the data set.
         x.updateLen(lines)
@@ -60,9 +60,12 @@ def initializeVectors(x, y):
         i = 0
         #goes through each rows in the csv file and updates x and y
         for row in csv_reader:
-            x.data[i] = float(row[0])
-            y.data[i] = float(row[1])
-            i += 1
+            try:
+                x.data[i] = float(row[0])
+                y.data[i] = float(row[1])
+                i += 1
+            except ValueError:
+                raise Exception(f'Contains non-number value')
 
         #updates the average of the vectors
         x.avg()
@@ -72,9 +75,12 @@ def initializeVectors(x, y):
 def inputManual(x, y):
         #file was not a csv and we need to get manual input
         #initalize the x and y vectors with the proper sizes.
-        numEntries = int(input(f"How many entries in the database: "))
+        try:
+            numEntries = int(input(f"How many entries in the database: "))
+        except ValueError:
+            raise Exception("Input is not number")
         if numEntries < 3:
-            sys.exit(f"Error: Sample size not large enough")
+            raise Exception(f"Error: Invalid Sample Size")
         x.updateLen(numEntries)
         y.updateLen(numEntries)
 
@@ -84,6 +90,7 @@ def inputManual(x, y):
 
         print(f"Please input the y values (with respect to the x values)")
         y.updateVals() #get the values for the y vector
+
 
 def writeToFile(x, y, line, yhat, errors):     
 
@@ -177,33 +184,37 @@ def calculateErrors(x, y, line, yhat, errors):
 
     return errors
 
-   
-
-
-if __name__ == "__main__":
+def main():
     """TODO: Take in csv file as input for larger data sets."""
     x = Vector(0)
     y = Vector(0)
     line = LinearRegression(0)
     errors = Vector(0)
     predicted = Vector(0)
+
     try:
         initializeVectors(x, y)
         calculateLine(x, y, line)
         predicted = calculatePredicted(x, line)
         errors = calculateErrors(x, y, line, predicted, errors)
         writeToFile(x, y, line, predicted, errors)
+
     except Exception as er: 
         print(f'Error: {er}')
         try:
             print(f"Unable to make calculations, please input values manually.")
             inputManual(x, y)
+            calculateLine(x, y, line)
             predicted = calculatePredicted(x, line)
             errors = calculateErrors(x, y, line, predicted, errors)
-            writeToFile(x, y)
+            writeToFile(x, y, line, predicted, errors)
+
+
         except Exception as e:
+            print(traceback.format_exc())
             print(f"Error occured: {e}")
     
-
+if __name__ == "__main__":
+    main()
 
     
