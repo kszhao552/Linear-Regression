@@ -17,7 +17,7 @@ class Vector(object):
         """takes the input and updates the list within the vector"""
         for i in range(self.size):
             try:
-                self.data[i] = int(input())
+                self.data[i] = float(input())
             except ValueException:
                 raise Exception("Input is not number")
         self.avg()
