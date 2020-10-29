@@ -50,7 +50,7 @@ def initializeVectors(x, y):
             next(csv_reader, None)
             lines -= 1
         if lines <3:
-            raise Exception(f"Error: Sample size not large enough")
+            raise ValueError(f"Error: Sample size not large enough")
 
         #update the length of the vectors to match the data set.
         x.updateLen(lines)
@@ -65,7 +65,7 @@ def initializeVectors(x, y):
                 y.data[i] = float(row[1])
                 i += 1
             except ValueError:
-                raise Exception(f'Contains non-number value')
+                raise ValueError(f'Contains non-number value')
 
         #updates the average of the vectors
         x.avg()
@@ -78,7 +78,7 @@ def inputManual(x, y):
         try:
             numEntries = int(input(f"How many entries in the database: "))
         except ValueError:
-            raise Exception("Input is not number")
+            raise ValueError("Input is not number")
         if numEntries < 3:
             raise Exception(f"Error: Invalid Sample Size")
         x.updateLen(numEntries)

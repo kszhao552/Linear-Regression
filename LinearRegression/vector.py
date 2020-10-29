@@ -19,7 +19,7 @@ class Vector(object):
             try:
                 self.data[i] = float(input())
             except ValueException:
-                raise Exception("Input is not number")
+                raise ValueError("Input is not number")
         self.avg()
 
     def changeVals(self, list):
