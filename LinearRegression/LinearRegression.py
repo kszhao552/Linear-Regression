@@ -25,11 +25,8 @@ def sumSquare(vector1, vector2):
     #return the difference between the two/
     return sum1 - (sum2)
 
-def initializeVectors(x, y):
-     #ask the user to select a file path.
-    root = tk.Tk()
-    root.withdraw()
-    filePath = filedialog.askopenfilename()
+def initializeVectors(x, y, filePath):
+   
 
 
     with open(filePath, 'r+') as input_file:
@@ -158,7 +155,8 @@ def calculateLine(x, y, line):
 
     line.update_vals(x, y) #creates the values for the linear regression.
 
-   
+    if (line.SSxx == 0 or Line.SSyy == 0):
+        raise ZeroDivisionError("Regression is a flat line.")
     line.r = round(line.SSxy/(math.sqrt(line.SSxx*line.SSyy)), 3) #calculates the coefficient of determination
     line.rSquared = round(pow(line.r, 2), 3) #calculates the coefficient of correlation
 
@@ -188,12 +186,17 @@ def main():
     """TODO: Take in csv file as input for larger data sets."""
     x = Vector(0)
     y = Vector(0)
-    line = LinearRegression(0)
+    line = Regression(0)
     errors = Vector(0)
     predicted = Vector(0)
 
+    #ask the user to select a file path.
+    root = tk.Tk()
+    root.withdraw()
+    filePath = filedialog.askopenfilename()
+
     try:
-        initializeVectors(x, y)
+        initializeVectors(x, y, filePath)
         calculateLine(x, y, line)
         predicted = calculatePredicted(x, line)
         errors = calculateErrors(x, y, line, predicted, errors)
