@@ -4,6 +4,8 @@ class Vector(object):
         self.data = [0 for x in range(size)]
         self.size = size
         self.average = 0
+        self.min = 0
+        self.max =0
 
     def avg(self):
         """calculates the average of the vector"""
@@ -21,11 +23,16 @@ class Vector(object):
             except ValueException:
                 raise ValueError("Input is not number")
         self.avg()
+        self.max = max(self.data)
+        self.min = min(self.data)
 
     def changeVals(self, list):
         """updates the values for a given list"""
         for i in range(self.size):
             self.data[i] = list[i]
+
+        self.max = max(self.data)
+        self.min = min(self.data)
 
     def updateLen(self, len):
         """changes the length of the vector"""
