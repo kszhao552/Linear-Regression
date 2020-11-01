@@ -42,7 +42,8 @@ while True:
 
     #If the user wants to input values individually, then we must prompt the user to do so.
     if event == "Exit":
-        break
+        window.close()
+        sys.exit(0)
 
     if event == sg.WIN_CLOSED:
         window.close()
