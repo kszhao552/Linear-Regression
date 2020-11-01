@@ -145,7 +145,6 @@ def writeToFile(x, y, line, yhat, errors):
                 vector_writer.writerow([x.data[i], y.data[i], yhat.data[i], errors.data[i]])
     
         print('\n')
-        print(f'Output has been created in the directory')
 
 def calculateLine(x, y, line):
     line.updateLen(x.size)
@@ -201,6 +200,7 @@ def main():
         predicted = calculatePredicted(x, line)
         errors = calculateErrors(x, y, line, predicted, errors)
         writeToFile(x, y, line, predicted, errors)
+        print(f'Output has been created in the directory')
 
     except Exception as er: 
         print(f'Error: {er}')
@@ -211,6 +211,7 @@ def main():
             predicted = calculatePredicted(x, line)
             errors = calculateErrors(x, y, line, predicted, errors)
             writeToFile(x, y, line, predicted, errors)
+            print(f'Output has been created in the directory')
 
 
         except Exception as e:
