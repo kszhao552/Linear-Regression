@@ -6,3 +6,5 @@ To use the script, place all the .py files into the same directory. The script w
 UserInterface.py: This script will create a simple gui that will make selecting your input file much easier. It will calculate the same values as LinearRegression.py and output the same files as it.
 After running it, select the file. If there are any errors, it will bring a pop up and not continue on. Afterwards, it will display a graph of the regression with the points ploted.
 BEWARE: The graph will not show axis if the value 0 is not in the range of values, so the graph will not display a scale and will be not reliable.
+
+If you simply wish to run it with the gui, please just download the dist file and run the .exe contained within it. If you want to run the programs through the script, make sure you download all the files beside the dist file and place them in the same directory.
