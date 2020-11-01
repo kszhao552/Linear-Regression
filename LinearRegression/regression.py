@@ -1,5 +1,5 @@
 from vector import Vector
-class LinearRegression(object):
+class Regression(object):
     def __init__(self, size):
         #initalization of the class with most of the variables set to 0
         self.size = size

@@ -1,5 +1,5 @@
 from vector import Vector
-from regression import LinearRegression
+from regression import Regression
 import math
 import csv
 import pandas
