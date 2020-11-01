@@ -155,7 +155,7 @@ def calculateLine(x, y, line):
 
     line.update_vals(x, y) #creates the values for the linear regression.
 
-    if (line.SSxx == 0 or Line.SSyy == 0):
+    if (line.SSxx == 0 or line.SSyy == 0):
         raise ZeroDivisionError("Regression is a flat line.")
     line.r = round(line.SSxy/(math.sqrt(line.SSxx*line.SSyy)), 3) #calculates the coefficient of determination
     line.rSquared = round(pow(line.r, 2), 3) #calculates the coefficient of correlation
