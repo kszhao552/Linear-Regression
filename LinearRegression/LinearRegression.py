@@ -68,6 +68,10 @@ def initializeVectors(x, y, filePath):
         x.avg()
         y.avg()
 
+        #updates the extremes of the vectors
+        x.updateExtrem()
+        y.updateExtrem()
+
 
 def inputManual(x, y):
         #file was not a csv and we need to get manual input
@@ -144,7 +148,6 @@ def writeToFile(x, y, line, yhat, errors):
             for i in range(x.size):
                 vector_writer.writerow([x.data[i], y.data[i], yhat.data[i], errors.data[i]])
     
-        print('\n')
 
 def calculateLine(x, y, line):
     line.updateLen(x.size)
