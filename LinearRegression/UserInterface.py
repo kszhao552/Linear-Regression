@@ -2,6 +2,7 @@ import LinearRegression
 from regression import Regression
 from vector import Vector
 import PySimpleGUI as sg
+import matplotlib.pyplot as plt
 import sys
 
 layout = [[sg.Text('Select a file:')], 
