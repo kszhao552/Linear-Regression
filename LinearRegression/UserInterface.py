@@ -1,8 +1,12 @@
 import LinearRegression
 from regression import Regression
 from vector import Vector
+from matplotlib.ticker import NullFormatter  
 import PySimpleGUI as sg
 import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import matplotlib
+matplotlib.use('TkAgg')
 import numpy as np
 import sys
 
@@ -60,4 +64,4 @@ fig = plt.figure()
 plt.plot(x.data, y.data, 'ro')
 plt.plot(domain, range)
 plt.axis([x.min - 10, x.max + 10 , y.min - 10, y.max+10])
-plt.show()
+plt.draw()
