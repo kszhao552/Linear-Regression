@@ -30,6 +30,9 @@ class Regression(object):
         self.update_bhat1()
         self.update_bhat0(xlist, ylist)
     
+    def predictVal(self, val):
+        return (self.bhat1 * val + self.bhat0)
+
     def errorList(self, ylist, predictedlist):
         """Creates the error vector and returns it.
         In order to do so, we need to have the x vector and y vector.
@@ -48,7 +51,7 @@ class Regression(object):
         #Creates the list of the predicted values and returns it using the created regression and the x vector.
         yhat = Vector(self.size)
         for i in range(self.size):
-            yhat.data[i] = round(self.bhat1 * xlist[i] + self.bhat0, 3)
+            yhat.data[i] = round(self.predictVal(xlist[i]), 3)
 
         return yhat
 
