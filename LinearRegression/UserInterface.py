@@ -60,8 +60,38 @@ while True:
 #if we are here, then a regression has been made and we should be able to graph it.
 domain = [x.min-10, x.max+10]
 range = [ line.bhat0 + line.bhat1*y.min, line.bhat0 + line.bhat1*y.max]
-fig = plt.figure()
-plt.plot(x.data, y.data, 'ro')
-plt.plot(domain, range)
-plt.axis([x.min - 10, x.max + 10 , y.min - 10, y.max+10])
-plt.draw()
+
+"""This part of the code received from:
+https://github.com/PySimpleGUI/PySimpleGUI/blob/master/DemoPrograms/Demo_Matplotlib.py"""
+
+fig = matplotlib.figure.Figure(figsize=(5, 4), dpi=100)
+t = np.arange(0, 3, .01)
+axs = fig.add_subplot(111)
+axs.plot(x.data, y.data, 'ro')
+axs.plot(domain, range)
+axs.axis([x.min - 10, x.max + 10 , y.min - 10, y.max+10])
+
+def draw_figure(canvas, figure):
+    figure_canvas_agg = FigureCanvasTkAgg(figure, canvas)
+    figure_canvas_agg.draw()
+    figure_canvas_agg.get_tk_widget().pack(side='top', fill='both', expand=1)
+    return figure_canvas_agg
+
+
+# define the window layout
+layout1 = [[sg.Canvas(key='-CANVAS-')],
+          [sg.Button('Ok')]]
+
+# create the form and show it without the plot
+window1 = sg.Window('Linear Regression', layout1, finalize=True, element_justification='center', font='Helvetica 18')
+
+# add the plot to the window
+fig_canvas_agg = draw_figure(window1['-CANVAS-'].TKCanvas, fig)
+
+
+while True:
+    event, values = window1.read()
+
+    if event == sg.WIN_CLOSED or event == 'Ok':
+        window1.close()
+        sys.exit(0)
