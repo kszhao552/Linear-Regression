@@ -3,6 +3,7 @@ from regression import Regression
 from vector import Vector
 import PySimpleGUI as sg
 import matplotlib.pyplot as plt
+import numpy as np
 import sys
 
 layout = [[sg.Text('Select a file:')], 
@@ -53,35 +54,10 @@ while True:
 
 
 #if we are here, then a regression has been made and we should be able to graph it.
-
-layout1 = [[sg.Graph(canvas_size=(400, 400), graph_bottom_left=(x.min, y.min), graph_top_right=(x.max,y.max), background_color='white', key='graph')],]    
-
-window1 = sg.Window('Linear Regression', layout1, grab_anywhere=True).Finalize()    
-graph = window1['graph']         # type: sg.Graph
-
-# Draw axis    
-graph.DrawLine((x.min,0), (x.max,0))    
-graph.DrawLine((0,y.min), (0,y.max))    
-
-for z in range(int(x.min), int(x.max), 20):    
-    graph.DrawLine((z,-3), (z,3))    
-
-
-for w in range(int(y.min), int(y.max), 20):    
-    graph.DrawLine((-3,w), (3,w))    
-
-for i in range(x.size):
-    graph.DrawCircle((x.data[i], y.data[i]), 1, line_color='blue', fill_color='blue')
-
-
-# Draw Graph    
-for z in range(int(x.min) ,int(x.max)):    
-    w = line.bhat0 + line.bhat1*z  
-    graph.DrawCircle((z,w), 1, line_color='red', fill_color='red')    
-
-while True:
-    event, values = window1.read()  
-
-    if event == sg.WIN_CLOSED:
-        window.close()
-        sys.exit(0)
+domain = [x.min-10, x.max+10]
+range = [ line.bhat0 + line.bhat1*y.min, line.bhat0 + line.bhat1*y.max]
+fig = plt.figure()
+plt.plot(x.data, y.data, 'ro')
+plt.plot(domain, range)
+plt.axis([x.min - 10, x.max + 10 , y.min - 10, y.max+10])
+plt.show()
