@@ -8,3 +8,5 @@ After running it, select the file. If there are any errors, it will bring a pop 
 BEWARE: The graph will not show axis if the value 0 is not in the range of values, so the graph will not display a scale and will be not reliable.
 
 If you simply wish to run it with the gui, please just download the dist file and run the .exe contained within it. If you want to run the programs through the script, make sure you download all the files beside the dist file and place them in the same directory.
+
+Credit to https://github.com/PySimpleGUI/PySimpleGUI/blob/master/DemoPrograms/Demo_Matplotlib.py for implementing MatPlotLib into PySimpleGui to prevent blocking when displaying graphs.
