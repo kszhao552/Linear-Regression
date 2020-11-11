@@ -59,7 +59,7 @@ while True:
 
 #if we are here, then a regression has been made and we should be able to graph it.
 domain = [x.min-10, x.max+10]
-range = [ line.bhat0 + line.bhat1*y.min, line.bhat0 + line.bhat1*y.max]
+range = [line.bhat0 + line.bhat1*(x.min-10), line.bhat0 + line.bhat1*(x.max+10)]
 
 """This part of the code received from:
 https://github.com/PySimpleGUI/PySimpleGUI/blob/master/DemoPrograms/Demo_Matplotlib.py"""
